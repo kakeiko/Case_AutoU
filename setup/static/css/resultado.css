@@ -1,0 +1,60 @@
+@import url(/static/css/variaveis.css);
+
+.title-proj {
+  color: var(--cor-vermelho-escuro);
+  font-size: 64px;
+  margin: 10px;
+}
+
+.part-classifica,
+.part-resposta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-classifica {
+  color: var(--cor-vermelho);
+  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
+    -1px 1px 0 var(--cor-vermelho-escuro),
+    -1px -1px 0 var(--cor-vermelho-escuro),
+    1px -1px 0 var(--cor-vermelho-escuro);
+  font-size: 42px;
+  margin: 30px 0px 15px 0;
+}
+
+.text-classifica {
+  text-shadow: 1px 1px 0 var(--cor-verde-escuro),
+    -1px 1px 0 var(--cor-verde-escuro), -1px -1px 0 var(--cor-verde-escuro),
+    1px -1px 0 var(--cor-verde-escuro);
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: var(--cor-verde-neon);
+}
+
+.title-resposta {
+  color: var(--cor-vermelho);
+  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
+    -1px 1px 0 var(--cor-vermelho-escuro),
+    -1px -1px 0 var(--cor-vermelho-escuro),
+    1px -1px 0 var(--cor-vermelho-escuro);
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.text-resposta {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 15px 0 0 0;
+  color: black;
+  width: 800px;
+}
+
+.link-index {
+  margin: 50px 0px;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+}

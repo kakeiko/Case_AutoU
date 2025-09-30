@@ -1,0 +1,122 @@
+@import url(/static/css/variaveis.css);
+
+.messages {
+  position: absolute;
+}
+#mensagens {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+#mensagens p {
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+
+.success {
+  background-color: #1e3d2f;
+  color: #5ce078;
+  border-left: 4px solid #5ce078;
+}
+
+.error {
+  background-color: #3d1e1e;
+  color: #e05c5c;
+  border-left: 4px solid #e05c5c;
+}
+
+.title-proj {
+  color: var(--cor-vermelho-escuro);
+  font-size: 64px;
+  margin: 10px;
+}
+
+.title-index {
+  color: var(--cor-vermelho);
+  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
+    -1px 1px 0 var(--cor-vermelho-escuro),
+    -1px -1px 0 var(--cor-vermelho-escuro),
+    1px -1px 0 var(--cor-vermelho-escuro);
+  font-size: 42px;
+  margin: 30px;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+}
+
+.label-file {
+  cursor: pointer;
+  color: var(--cor-branco-avermelhado);
+  background-color: var(--cor-vermelho);
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px 30px;
+  margin: 15px;
+  border: 2px solid var(--cor-vermelho-escuro);
+  border-radius: 10px;
+}
+
+.input-file {
+  visibility: hidden;
+  position: absolute;
+}
+
+.file-types {
+  font-weight: 500;
+}
+
+.text-ou {
+  font-size: 32px;
+  color: var(--cor-vermelho);
+  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
+    -1px 1px 0 var(--cor-vermelho-escuro),
+    -1px -1px 0 var(--cor-vermelho-escuro),
+    1px -1px 0 var(--cor-vermelho-escuro);
+  font-weight: 600;
+  margin: 20px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-text {
+  color: var(--cor-vermelho);
+  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
+    -1px 1px 0 var(--cor-vermelho-escuro),
+    -1px -1px 0 var(--cor-vermelho-escuro),
+    1px -1px 0 var(--cor-vermelho-escuro);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 10px;
+}
+
+.input-text {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 5px;
+  width: 600px;
+  height: 200px;
+  margin: 10px;
+  resize: none;
+}
+
+.btn-submit {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: var(--cor-branco-avermelhado);
+  background-color: var(--cor-vermelho-escuro);
+  border: 0;
+  border-radius: 15px;
+}

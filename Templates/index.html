@@ -1,0 +1,52 @@
+{% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case AutoU</title>
+  </head>
+  <body>
+    {% if messages %}
+    <div class="messages" id="mensagens">
+      {% for message in messages %}
+      <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+      </p>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="container">
+      <h1 class="title-proj">Case AutoU</h1>
+      <h2 class="title-index">Faça o upload do Email</h2>
+
+      <form
+        action="{% url 'index' %}"
+        class="form-index"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="file">
+          <label for="{{ form.file.id_for_label }}" class="label-file"
+            >Escolher arquivo</label
+          >
+          {{ form.file }}
+          <p class="file-types">Apenas é aceitos arquivos .txt e .pdf</p>
+        </div>
+
+        <p class="text-ou">ou</p>
+        <div class="text">
+          <h5 class="label-text">Escreva o Email</h5>
+          {{ form.text }}
+        </div>
+
+        <button class="btn-submit" type="submit">Classificar</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+{% endblock %}

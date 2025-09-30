@@ -1,0 +1,28 @@
+{% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'css/resultado.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case AutoU</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title-proj">Case AutoU</h1>
+      <div class="part-classifica">
+        <h2 class="title-classifica">A classificação do email é:</h2>
+        <p class="text-classifica">{{ resultado.classificacao }}</p>
+      </div>
+      <div class="part-resposta">
+        <h3 class="title-resposta">A resposta sugerida é:</h3>
+        <p class="text-resposta">{{ resultado.resposta }}</p>
+      </div>
+      <a href="{% url 'index' %}" class="link-index"
+        >Clique para analisar outro Email!</a
+      >
+    </div>
+  </body>
+</html>
+
+{% endblock %}
