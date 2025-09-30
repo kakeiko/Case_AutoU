@@ -2,13 +2,16 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from django.conf import settings
 from openai import OpenAI
 import os
+
 
 client = OpenAI(api_key=os.getenv("API_KEY"))
 
 def bot_classifica(email):
-    df = pd.read_csv("C:\\Users\\Pichau\\Documents\\workspace\\pessoal\\python\\CaseAutoU\\Case\\emails.csv")
+    file_path = os.path.join(settings.BASE_DIR, "Case", "emails.csv")
+    df = pd.read_csv(file_path)
     df = df.dropna()
     X_train, X_test, y_train, y_test = train_test_split(df["texto"], df["rotulo"], test_size=0.2)
 
