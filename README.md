@@ -11,7 +11,7 @@ Automação de leitura e classificação de e-mails e sugestão de resposta com 
 - [Pandas](https://pandas.pydata.org/)
 - [OpenAI API](https://platform.openai.com/)
 - [Scikit-learn](https://scikit-learn.org)
-- [Render](https://render.com/) para deploy
+- [Render](https://render.com/) para deploy (O plano gratuito do render entra em modo sleep depois de 15 minutos sem requisição, e demora alguns segundos para voltar pro ar, por favor espere.)
 
 ---
 
