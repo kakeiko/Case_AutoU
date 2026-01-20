@@ -1,71 +1,73 @@
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from django.conf import settings
-from openai import OpenAI
+import re
+import requests
+import unicodedata
 import os
+from dotenv import load_dotenv
+from sklearn.feature_extraction.text import TfidfVectorizer
 
+load_dotenv()
 
-client = OpenAI(api_key=os.getenv("API_KEY"))
+vectorizer = TfidfVectorizer(
+    stop_words="Portugues",
+    max_features=20
+)
 
-def bot_classifica(email):
-    file_path = os.path.join(settings.BASE_DIR, "Case", "emails.csv")
-    df = pd.read_csv(file_path)
-    df = df.dropna()
-    X_train, X_test, y_train, y_test = train_test_split(df["texto"], df["rotulo"], test_size=0.2)
+def process_email(email):
+    if isinstance(email, list):
+        email = " ".join(email)
+    STOPWORDS_PT = [
+        "a", "o", "e", "de", "do", "da", "dos", "das", "em", "para",
+        "por", "com", "que", "na", "no", "nos", "nas", "um", "uma",
+        "é", "ser", "foi", "são", "ao", "à", "às", "se", "sua",
+        "seu", "seus", "suas", "como", "mais", "mas", "ou", "já",
+        "não", "sim", "também", "até", "sobre", "entre", "após",
+        "antes", "essa", "esse", "isso", "esta", "este"
+    ]
+    email_clear = email.lower()
+    email_clear = unicodedata.normalize("NFKD", email_clear).encode("ascii", "ignore").decode("utf-8")
+    email_clear = re.sub(r"http\S+", "", email_clear)
+    email_clear = re.sub(r"[^a-zA-Z0-9\s]", "", email_clear)
+    email_clear = re.sub(r"\s+", " ", email_clear)
 
-    vectorizer = TfidfVectorizer()
-    X_train_tfidf = vectorizer.fit_transform(X_train)
-    X_test_tfidf = vectorizer.transform(X_test)
-    model = LogisticRegression()
-    model.fit(X_train_tfidf, y_train)
-    documento_para_prever = [email]
+    vectorizer = TfidfVectorizer(
+        stop_words=STOPWORDS_PT,
+        max_features=10
+    )
 
-    prova_tfidf = vectorizer.transform(documento_para_prever)
+    tfidf = vectorizer.fit_transform([email_clear])
+    feature_names = vectorizer.get_feature_names_out()
+    scores = tfidf.toarray()[0]
 
-    previsao = model.predict(prova_tfidf)
-    return str(previsao[0])
-
-def gerar_resposta(email, produtivo):
-    if produtivo:
-        prompt = f"""
-                    Você é um assistente que redige respostas profissionais em português do Brasil.
-
-                    Tarefa:
-                    - Leia atentamente o e-mail abaixo.
-                    - Crie uma resposta educada e completa, que:
-                    • Confirme o recebimento.
-                    • Aborde todos os pontos importantes.
-                    • Proponha próximos passos ou esclarecimentos, se necessário.
-                    • Use tom profissional, mas cordial.
-
-                    E-mail recebido:
-                    "{email}"
-                    """
-    else:
-        prompt = f"""
-                    Você é um assistente que responde e-mails em português do Brasil.
-
-                    Tarefa:
-                    - Leia o e-mail abaixo.
-                    - Gere uma resposta curta, educada e neutra, informando que:
-                    • A mensagem não se enquadra no escopo de atendimento, OU
-                    • Não há ação necessária no momento.
-                    - Mantenha tom respeitoso e objetivo.
-
-                    E-mail recebido:
-                    "{email}"
-
-                    Forneça apenas a resposta final, em até 3 frases.
-                    """
-    try:
-        resp = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.7,
-            max_tokens=300,
+    keywords = [
+        word for word, score in sorted(
+            zip(feature_names, scores),
+            key=lambda x: x[1],
+            reverse=True
         )
-        return resp.choices[0].message.content.strip()
-    except Exception as e:
-        return f"[Erro ao gerar resposta: {e}]"
+        if score > 0
+    ]
+
+    dates = re.findall(r"\b\d{2}/\d{2}/\d{4}\b", email)
+
+    has_link = "http" in email.lower() or "clique aqui" in email.lower()
+
+    return {
+        "clean_text": email_clear,
+        "keywords": keywords,
+        "dates": dates,
+        "has_link": has_link,
+    }
+
+def response_email(email):
+    response = requests.post(
+        os.getenv("N8N_LINK"),
+        json=email,
+        timeout=10
+    )
+
+    resposta = response.json()
+    resposta = resposta['resultado'].split('/', 1)
+    classificao = resposta[0]
+    resultado = resposta[1]
+    
+    return classificao, resultado

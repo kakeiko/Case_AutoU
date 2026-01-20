@@ -24,5 +24,11 @@
     </div>
   </body>
 </html>
-
+<script>
+  const classificacao = document.querySelector('.text-classifica');
+  if (classificacao.textContent.trim() == "Improdutivo") {
+    console.log('foi');
+    classificacao.style.color = 'red';
+  }
+</script>
 {% endblock %}

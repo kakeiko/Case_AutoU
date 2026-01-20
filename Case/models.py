@@ -6,6 +6,5 @@ class Email(models.Model):
     text = models.TextField(null=True, blank=True)
 
 class Resultado(models.Model):
-    id = models.IntegerField(null=False, blank=False, primary_key=True)
     classificacao = models.TextField(null=False, blank=False)
     resposta = models.TextField(null=False, blank=False)

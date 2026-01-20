@@ -1,7 +1,7 @@
 @import url(/static/css/variaveis.css);
 
 .title-proj {
-  color: var(--cor-vermelho-escuro);
+  color: var(--cor-roxo-claro);
   font-size: 64px;
   margin: 10px;
 }
@@ -15,15 +15,14 @@
 }
 
 .title-classifica {
-  color: var(--cor-vermelho);
-  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
-    -1px 1px 0 var(--cor-vermelho-escuro),
-    -1px -1px 0 var(--cor-vermelho-escuro),
-    1px -1px 0 var(--cor-vermelho-escuro);
+  color: var(--cor-roxo);
+  text-shadow: 1px 1px 0 var(--cor-roxo-escuro),
+    -1px 1px 0 var(--cor-roxo-escuro),
+    -1px -1px 0 var(--cor-roxo-escuro),
+    1px -1px 0 var(--cor-roxo-escuro);
   font-size: 42px;
-  margin: 30px 0px 15px 0;
+  margin: 30px 0 15px 0;
 }
-
 .text-classifica {
   text-shadow: 1px 1px 0 var(--cor-verde-escuro),
     -1px 1px 0 var(--cor-verde-escuro), -1px -1px 0 var(--cor-verde-escuro),
@@ -35,11 +34,11 @@
 }
 
 .title-resposta {
-  color: var(--cor-vermelho);
-  text-shadow: 1px 1px 0 var(--cor-vermelho-escuro),
-    -1px 1px 0 var(--cor-vermelho-escuro),
-    -1px -1px 0 var(--cor-vermelho-escuro),
-    1px -1px 0 var(--cor-vermelho-escuro);
+  color: var(--cor-roxo);
+  text-shadow: 1px 1px 0 var(--cor-roxo-escuro),
+    -1px 1px 0 var(--cor-roxo-escuro),
+    -1px -1px 0 var(--cor-roxo-escuro),
+    1px -1px 0 var(--cor-roxo-escuro);
   font-size: 32px;
   font-weight: 600;
 }
@@ -48,13 +47,20 @@
   font-size: 24px;
   font-weight: 500;
   margin: 15px 0 0 0;
-  color: black;
+  color: var(--cor-branco-arroxeado);
   width: 800px;
+  line-height: 1.6;
 }
 
 .link-index {
-  margin: 50px 0px;
-  color: black;
+  margin: 50px 0;
+  color: var(--cor-roxo-claro);
   font-size: 16px;
   font-weight: 500;
+  text-decoration: none;
+}
+
+.link-index:hover {
+  color: var(--cor-roxo);
+  text-decoration: underline;
 }

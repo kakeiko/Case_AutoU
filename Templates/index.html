@@ -1,4 +1,4 @@
-{% load static %} {% block content %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,12 +29,9 @@
         enctype="multipart/form-data"
       >
         {% csrf_token %}
-        <div class="file">
-          <label for="{{ form.file.id_for_label }}" class="label-file"
-            >Escolher arquivo</label
-          >
-          {{ form.file }}
-          <p class="file-types">Apenas é aceitos arquivos .txt e .pdf</p>
+        <div class="upload-box" id="uploadBox">
+          <input type="file" id="fileInput" name='file' hidden accept=".pdf,.txt"/>
+          <p>Arraste um arquivo aqui<br>ou clique para selecionar</p>
         </div>
 
         <p class="text-ou">ou</p>
@@ -48,5 +45,40 @@
     </div>
   </body>
 </html>
+<script>
+  const uploadBox = document.getElementById("uploadBox");
+  const fileInput = document.getElementById("fileInput");
 
-{% endblock %}
+  uploadBox.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  uploadBox.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    uploadBox.classList.add("dragover");
+  });
+
+  uploadBox.addEventListener("dragleave", () => {
+    uploadBox.classList.remove("dragover");
+  });
+
+  uploadBox.addEventListener("drop", (e) => {
+    e.preventDefault();
+    uploadBox.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  });
+
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files.length > 0) {
+      handleFile(fileInput.files[0]);
+    }
+  });
+
+  function handleFile(file) {
+    uploadBox.innerHTML = `<strong>${file.name}</strong>`;
+    console.log("Arquivo selecionado:", file);
+  }
+
+</script>

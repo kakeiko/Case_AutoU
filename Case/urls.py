@@ -4,5 +4,5 @@ import Case.views as views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('resultado/<str:id>/', views.resultado, name='resultado'),
+    path('resultado/<int:id>/', views.resultado, name='resultado'),
 ]

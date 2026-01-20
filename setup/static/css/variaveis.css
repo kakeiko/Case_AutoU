@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --cor-vermelho-m-claro: #ff9d9a;
-  --cor-vermelho-claro: #ff5c58;
-  --cor-branco-avermelhado: #fff3f3;
-  --cor-offwhite: #e2e6df;
-  --cor-vermelho-c: #ff1f19;
+  --cor-roxo-m-claro: #9a97ff;
+  --cor-roxo-claro: #6f6bff;
+  --cor-branco-arroxeado: #e6e6ff;
+  --cor-offwhite-arroxeado: #1a1a2e;
+  --cor-roxo-c: #5c5ce0;
   --fonte-principal: "Poppins";
-  --cor-vermelho: #ff0700;
-  --cor-vermelho-escuro: #680300;
+  --cor-roxo: #7878fa;
+  --cor-roxo-escuro: #0f0f1f;
   --cor-verde-neon: #2cff05;
   --cor-verde-escuro: #06402b;
 }
@@ -18,7 +18,7 @@
   font-family: var(--fonte-principal);
 }
 body {
-  background-color: var(--cor-offwhite);
+  background-color: var(--cor-roxo-escuro);
 }
 .container {
   display: flex;
