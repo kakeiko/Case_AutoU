@@ -5,7 +5,7 @@ from django.contrib import messages
 from Case.forms import EmailForm
 
 def index(request):
-    form = EmailForm
+    form = EmailForm()
     if request.method == 'POST':
         form = EmailForm(request.POST, request.FILES)
         if form.is_valid():
