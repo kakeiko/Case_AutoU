@@ -44,15 +44,72 @@ Criar um arquivo .env na raiz do projeto e adicionar as seguintes informações:
 SECRET_KEY = 'django-insecure-aw4gljtyx-l$f)lu6xg8=acos^$fs&@a*@%s1ls9nzzuk)#b_h'
 N8N_LINK = '[Seu link do n8n]'
 ```
+### 5. Configurar bancos de dados
 
-### 5. Rodas as migrações
+Recomendo usar o SQLite para isso substitua a linha 79 até a linha 88 do settings.py, por isso:
+
+```py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+
+### 6. Rodas as migrações
 
 ```bash
 python manage.py migrate
 ```
 
-### 6. Iniciar o servidor
+### 7. Subir o n8n com Docker (local)
+
+O n8n será usado para automatizar a leitura e classificação de e-mails e se comunicar com a aplicação Django.
+
+## 7.1. Pré-requisitos
+
+-Docker instalado e em execução
+
+## 7.2. Baixar a imagem do n8n
+```bash
+docker pull n8nio/n8n
+```
+
+## 7.3. Rodar o n8n localmente
+
+Execute o comando abaixo para subir o n8n:
+```bash
+docker run -it --rm ^
+  -p 5678:5678 ^
+  -v n8n_data:/home/node/.n8n ^
+  --name n8n ^
+  n8nio/n8n
+```
+
+## 7.4. Acessar o n8n
+
+Abra o navegador e acesse:
+
+http://localhost:5678
+
+
+Na primeira vez, o n8n pedirá para criar um usuário (e-mail e senha).
+
+## 7.5. Configurar o link do n8n no projeto Django
+
+No arquivo .env, configure o link do n8n:
+```env
+N8N_LINK=http://localhost:5678
+```
+
+Se o Django estiver rodando localmente, essa configuração já é suficiente.
+
+### 8. Iniciar o servidor
 
 ```bash
 python manage.py runserver
 ```
+
+
+
