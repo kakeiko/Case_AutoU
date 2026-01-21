@@ -45,7 +45,7 @@
     </div>
   </body>
 </html>
-<script >
+<script>
   const uploadBox = document.getElementById("uploadBox");
   const fileInput = document.getElementById("fileInput");
   const uploadText = document.getElementById("uploadText");
@@ -68,7 +68,13 @@
     uploadBox.classList.remove("dragover");
 
     const file = e.dataTransfer.files[0];
-    if (file) handleFile(file);
+    if (!file) return;
+    
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    fileInput.files = dataTransfer.files;
+
+    handleFile(file);
   });
 
   fileInput.addEventListener("change", () => {
@@ -79,7 +85,7 @@
 
   function handleFile(file) {
     uploadText.innerHTML = `<strong>${file.name}</strong>`;
-    console.log("Arquivo selecionado:", file);
+    console.log("Arquivo pronto para envio:", file);
   }
 </script>
 
