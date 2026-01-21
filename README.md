@@ -67,16 +67,16 @@ python manage.py migrate
 
 O n8n será usado para automatizar a leitura e classificação de e-mails e se comunicar com a aplicação Django.
 
-## 7.1. Pré-requisitos
+#### 7.1. Pré-requisitos
 
 -Docker instalado e em execução
 
-## 7.2. Baixar a imagem do n8n
+#### 7.2. Baixar a imagem do n8n
 ```bash
 docker pull n8nio/n8n
 ```
 
-## 7.3. Rodar o n8n localmente
+#### 7.3. Rodar o n8n localmente
 
 Execute o comando abaixo para subir o n8n:
 ```bash
@@ -87,7 +87,7 @@ docker run -it --rm ^
   n8nio/n8n
 ```
 
-## 7.4. Acessar o n8n
+#### 7.4. Acessar o n8n
 
 Abra o navegador e acesse:
 
@@ -96,7 +96,7 @@ http://localhost:5678
 
 Na primeira vez, o n8n pedirá para criar um usuário (e-mail e senha).
 
-## 7.5. Configurar o link do n8n no projeto Django
+#### 7.5. Configurar o link do n8n no projeto Django
 
 No arquivo .env, configure o link do n8n:
 ```env
