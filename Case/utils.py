@@ -50,7 +50,7 @@ def process_email(email):
     dates = re.findall(r"\b\d{2}/\d{2}/\d{4}\b", email)
 
     has_link = "http" in email.lower() or "clique aqui" in email.lower()
-
+    print(email_clear)
     return {
         "clean_text": email_clear,
         "keywords": keywords,
@@ -64,7 +64,7 @@ def response_email(email):
         json=email,
         timeout=10
     )
-
+    print(response.text)
     resposta = response.json()
     resposta = resposta['resultado'].split('/', 1)
     classificao = resposta[0]
